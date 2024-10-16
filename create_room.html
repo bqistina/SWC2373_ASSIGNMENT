@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Create a New Room</h2>
+        <form method="POST" action="">
+            <label for="title">Room Title:</label>
+            <input type="text" id="title" name="title" required placeholder="Enter room title">
+            <button type="submit">Create Room</button>
+        </form>
+        
+        <a href="{{ url_for('menu', access_token=access_token) }}"><button>Back to Menu</button></a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Main Menu</h2>
+
+        <!-- Display messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <ul>
+            <li><a href="{{ url_for('test_connection', access_token=access_token) }}">Test Connection (Option 0)</a></li>
+            <li><a href="{{ url_for('user_info', access_token=access_token) }}">Display User Info (Option 1)</a></li>
+            <li><a href="{{ url_for('rooms', access_token=access_token) }}">List Rooms (Option 2)</a></li>
+            <li><a href="{{ url_for('create_room', access_token=access_token) }}">Create a Room (Option 3)</a></li>
+            <li><a href="{{ url_for('rooms', access_token=access_token) }}">Send Message to Room (Option 4)</a></li>
+        </ul>
+    </div>
+</body>
+</html>

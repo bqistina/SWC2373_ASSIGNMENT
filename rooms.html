@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Webex Rooms</h2>
+        
+        <!-- Display messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <ul>
+            {% for room in rooms %}
+            <li>
+                <strong>{{ room['title'] }}</strong>
+                <!-- Form to send a message to the specific room -->
+                <form method="POST" action="{{ url_for('send_message', access_token=access_token) }}" class="message-area">
+                    <input type="hidden" name="room_id" value="{{ room['id'] }}">
+                    <textarea name="message" placeholder="Type your message here" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('menu', access_token=access_token) }}"><button>Back to Menu</button></a>
+    </div>
+</body>
+</html>
